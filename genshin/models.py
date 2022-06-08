@@ -2,14 +2,23 @@ from django.db import models
 
 
 def poster_path(instance, filename):
-    return "genshin/media/"+ str(instance.name) + "/poster/" + filename
+    return "genshin/media/" + str(instance.name) + "/poster/" + filename
 
 
 class Region(models.Model):
     name = models.CharField(max_length=50,
                             unique=True,
                             verbose_name='Region',
-                            help_text='Enter Region')
+                            help_text='Enter Region Name: ')
+    description = models.TextField(default='description',
+                                   blank=True,
+                                   null=True,
+                                   verbose_name='Description',
+                                   help_text='Enter Region\'s Description: ')
+    img = models.ImageField(upload_to=poster_path,
+                            blank=True,
+                            null=True,
+                            verbose_name='Character Image')
 
     def __str__(self):
         return self.name
@@ -19,7 +28,7 @@ class Artifacts(models.Model):
     name = models.CharField(max_length=50,
                             unique=True,
                             verbose_name='Artifacts',
-                            help_text='Enter Artifact Name')
+                            help_text='Enter Artifact Name: ')
 
     def __str__(self):
         return self.name
@@ -71,11 +80,15 @@ class Character(models.Model):
     name = models.CharField(max_length=50,
                             unique=True,
                             verbose_name='Character Name',
-                            help_text='Enter Character\'s Name')
+                            help_text='Enter Character\'s Name: ')
     img = models.ImageField(upload_to=poster_path,
                             blank=True,
                             null=True,
                             verbose_name='Character Image')
+    banner = models.ImageField(upload_to=poster_path,
+                               blank=True,
+                               null=True,
+                               verbose_name='Character Banner')
     elements = models.CharField(choices=ELEMENTS,
                                 verbose_name='Element',
                                 max_length=50)
@@ -86,8 +99,12 @@ class Character(models.Model):
                             verbose_name='Role',
                             max_length=50)
     recomended_artifacts = models.ManyToManyField(Artifacts, verbose_name='Artifacts')
-    region = models.ManyToManyField(Region, verbose_name='Region')
+    region = models.ManyToManyField(Region, verbose_name='Region', )
+    description = models.TextField(default='description',
+                                   blank=True,
+                                   null=True,
+                                   verbose_name='Description',
+                                   help_text='Enter Character\'s Description: ')
 
     def __str__(self):
         return self.name
-

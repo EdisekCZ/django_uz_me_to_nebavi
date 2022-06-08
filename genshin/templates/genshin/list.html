@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}List of Characters{% endblock %} {% block content %}
+    <div class="row mb-3">
+        <div class="col-sm-12 bg-danger"><h2 class="display-4 text-center">List of Characters</h2></div>
+    </div>
+    <div class="row"> {% for genshin in genshin_list %}
+        <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
+            <div class="card"> {% if genshin.img %}
+                <img class="card-img-top" src="{{ genshin.img.url }}" alt="{{ genshin.title }}"> {% endif %}
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <a href="{% url 'character_detail' genshin.pk %}">{{ genshin.title }}</a>
+                    </h4>
+                    <h4><b>{{ genshin.name }}</b></h4>
+                    <p class="card-text"><b>Element: </b> {{ genshin.elements }} </p>
+                    <p class="card-text"><b>Role: </b> {{ genshin.role }} </p>
+                    <a href="{% url 'character_detail' genshin.pk %}" class="btn btn-primary">Details</a>
+                </div>
+            </div>
+        </div> {% endfor %} </div> {% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}
+    Character Details {% endblock %}{% block content %}
+    <div class="row mb-3">
+        <div class="col-sm-12 bg-danger"><h2 class="display-4 text-center">Info</h2></div>
+    </div>
+    <div class="row mt-5 mb-3">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6 mt-3">
+            <h2 class="display-4 mb-3"><b>{{ character_detail.name }}</b></h2>
+            <div class="bg-secondary text-light p-2 mb-5">
+                <div>
+                    <b class="text-dark">Element: </b>{{ character_detail.elements }}
+                </div>
+                <div>
+                    <b class="text-dark">Region: </b>{% if character_detail.region.all %}
+                    {% for region in character_detail.region.all %}
+                        {{ region.name }}
+                    {% endfor %}
+                {% endif %}
+                </div>
+                <div>
+                    <b class="text-dark">Recommended artifact: </b>{% if character_detail.recomended_artifacts.all %}
+                    {% for artifacts in character_detail.recomended_artifacts.all %}
+                        {{ artifacts.name }}
+                    {% endfor %}
+                {% endif %}
+                </div>
+
+                <div>
+                    <b class="text-dark">Role: </b>{{ character_detail.role }}
+
+                    <p></p>
+                    <div class="row">
+                        <div class="col-md-9">{{ character_detail.description }}
+
+                        </div>
+                        <div class="col-md-3 mb-5"> {% if character_detail.img %}
+                                <a href="{{ character_detail.banner.url }}">
+                                    <img src="{{ character_detail.banner.url }}" class="img-fluid" alt="Character Banner">
+                                </a> {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <div class="col-lg-3"></div>
+    </div>>
+{% endblock %}

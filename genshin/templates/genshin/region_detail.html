@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}
+    Region Details {% endblock %}{% block content %}
+    <div class="row mb-3">
+        <div class="col-sm-12 bg-danger"><h2 class="display-4 text-center">Info</h2></div>
+    </div>
+    <div class="row mt-5 mb-3">
+        <div class="col-lg-3"></div>
+        <div class="col-lg-6 mt-3">
+            <h2 class="display-4 mb-3"><b>{{ region_detail.name }}</b></h2>
+            <div class="bg-secondary text-light p-2 mb-5">
+                <div>
+                    <b class="text-dark"></b>{{ region_detail.description }}
+                </div>
+                <p></p>
+                <div class="row">
+                    <div class="col-md-9">{{ character_detail.description }}
+
+                    </div>
+                    <div class="col-lg-12 mb-5">
+                            <img src="{{ region_detail.img.url }}" class="img-fluid" alt="Region Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3"></div>
+    </div>>
+{% endblock %}
